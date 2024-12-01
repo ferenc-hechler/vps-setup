@@ -27,3 +27,7 @@ chmod 755 /home/$USERNAME/setup-ssh.sh
 sudo -u "$USERNAME" /home/$USERNAME/setup-ssh.sh
 rm -f /home/$USERNAME/setup-ssh.sh
 
+chmod 660 /etc/sudoers
+echo "$USERNAME ALL = NOPASSWD : ALL" >> /etc/sudoers
+chmod 440 /etc/sudoers
+
