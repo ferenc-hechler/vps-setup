@@ -32,7 +32,7 @@ sudo docker run \
 nextcloud/all-in-one:latest
 
 
-# https://mycloud.vps-a.cluster-4.de:8443
+# https://mycloud.vps-b.cluster-4.de:8443
 
 # cleanup container / volumes / networks / images: 
 # https://thelinuxforum.com/articles/892-how-to-reset-uninstall-nextcloud-aio-completely
