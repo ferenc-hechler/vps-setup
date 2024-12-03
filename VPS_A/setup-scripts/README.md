@@ -15,6 +15,17 @@ rm 01-create-user.sh
 
 login as newly created user
 
+
+# Step 2 - clone repo
+
+```
+mkdir -p ~/git
+cd ~/git
+git clone https://github.com/ferenc-hechler/vps-setup.git
+```
+
+
+
 # 04 NextCloud
 
 ## access database
@@ -41,7 +52,4 @@ tar cvzf ncdata.tgz -C ~/ncdata .
 docker exec -it nextcloud-aio-mastercontainer cat /mnt/docker-aio-config/data/configuration.json > data-configuration.json
 
 docker exec nextcloud-aio-mastercontainer tar cz -C /mnt/docker-aio-config .  > docker-aio-config.tgz
-
 ```
-
-
