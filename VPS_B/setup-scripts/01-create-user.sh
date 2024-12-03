@@ -31,3 +31,6 @@ chmod 660 /etc/sudoers
 echo "$USERNAME ALL = NOPASSWD : ALL" >> /etc/sudoers
 chmod 440 /etc/sudoers
 
+apt-get update
+apt-get install -y git
+
