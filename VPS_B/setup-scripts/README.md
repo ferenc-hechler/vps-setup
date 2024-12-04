@@ -36,9 +36,13 @@ docker exec -it nextcloud-aio-database psql -U oc_nextcloud nextcloud_database
 
 ## create a db dump
 
+https://www.ionos.com/digitalguide/server/security/postgresql-backup/?srsltid=AfmBOooYNwG1bnT7rJb9_qcPA7YVbTGOMG4PpQUoDnAon2OlmjHFvUQM
+
 ```
-docker exec -it nextcloud-aio-database pg_dump -U oc_nextcloud nextcloud_database > pg-dump.sql
+docker exec -it nextcloud-aio-database pg_dump --clean --create -U oc_nextcloud nextcloud_database > pg-dump.sql
 ```
+
+
 
 ## backup ncdata
 
@@ -53,3 +57,43 @@ docker exec -it nextcloud-aio-mastercontainer cat /mnt/docker-aio-config/data/co
 
 docker exec nextcloud-aio-mastercontainer tar cz -C /mnt/docker-aio-config .  > docker-aio-config.tgz
 ```
+
+# restore
+
+## copy config json
+
+```
+docker container exec -i nextcloud-aio-mastercontainer "sh -c cat >/mnt/docker-aio-config/data/configuration.json" < configuration.json
+chown www-data:www-data /mnt/docker-aio-config/data/configuration.json
+chmod 770 /mnt/docker-aio-config/data/configuration.json
+
+```
+
+patch domain name if neccessary 
+
+## shutdown nextcloud-aio-mastercontainer
+
+```
+docker container stop nextcloud-aio-mastercontainer
+```
+
+
+
+## restore DB
+
+https://github.com/nextcloud/all-in-one/discussions/2143
+
+
+```
+docker exec nextcloud-aio-database dropdb -U nextcloud nextcloud_database -f
+docker exec nextcloud-aio-database createdb -U nextcloud nextcloud_database
+
+docker exec -i nextcloud-aio-database psql -U nextcloud nextcloud_database < pg-dump.sql
+```
+
+## start nextcloud-aio-mastercontainer
+
+```
+docker container start nextcloud-aio-mastercontainer
+```
+
