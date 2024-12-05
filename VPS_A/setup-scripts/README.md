@@ -46,6 +46,12 @@ docker exec -it nextcloud-aio-database pg_dump -U oc_nextcloud nextcloud_databas
 tar cvzf ncdata.tgz -C ~/ncdata .
 ```
 
+## restore ncdata
+
+```
+tar xz ncdata.tgz -C ~/ncdata < ncdata.tgz
+```
+
 ## backup config
 
 ```

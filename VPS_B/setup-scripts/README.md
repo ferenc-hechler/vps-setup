@@ -58,7 +58,18 @@ docker exec -it nextcloud-aio-mastercontainer cat /mnt/docker-aio-config/data/co
 docker exec nextcloud-aio-mastercontainer tar cz -C /mnt/docker-aio-config .  > docker-aio-config.tgz
 ```
 
+```
+docker exec -i nextcloud-aio-nextcloud cat /var/www/html/config/config.php > config.php
+ ```
+
 # restore
+
+## restore ncdata
+
+```
+sudo tar xz -C ~ferenc/ncdata < ncdata.tgz
+```
+
 
 ## copy config json
 
@@ -75,6 +86,8 @@ patch domain name if neccessary
 
 ```
 docker container stop nextcloud-aio-mastercontainer
+docker container start nextcloud-aio-apache
+docker container stop nextcloud-aio-nextcloud
 ```
 
 
@@ -94,6 +107,8 @@ docker exec -i nextcloud-aio-database psql -U nextcloud nextcloud_database < pg-
 ## start nextcloud-aio-mastercontainer
 
 ```
+docker container start nextcloud-aio-nextcloud
+docker container start nextcloud-aio-apache
 docker container start nextcloud-aio-mastercontainer
 ```
 
